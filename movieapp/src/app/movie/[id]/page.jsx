@@ -1,6 +1,20 @@
 import React from 'react'
 import Image from 'next/image'
 
+// export const metadata={
+//   title:'Movie Page'
+// }
+export async function generateMetadata({params}){
+  const id=params.id;
+  const movieDetail=await getMovie(id)
+  console.log(movieDetail,"movieDetail")
+  return{
+   title:movieDetail.title,
+  }
+}
+export const dynamic="force-dynamic";
+//dynamic title da unutma!!!
+
 const getMovie= async(id)=>{
     const res=await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=2b9b1b9f1c0919c4530fe2f420485043
     `)
